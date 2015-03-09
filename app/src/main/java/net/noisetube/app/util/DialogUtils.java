@@ -260,7 +260,7 @@ public class DialogUtils {
 
 
             return new AlertDialog.Builder(getActivity()).setView(body)
-                    .setPositiveButton(R.string.accept,
+                    .setPositiveButton("Accept",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int whichButton) {
                                     dialog.dismiss();
@@ -293,7 +293,7 @@ public class DialogUtils {
 
 
             return new AlertDialog.Builder(getActivity()).setView(body)
-                    .setPositiveButton(R.string.accept,
+                    .setPositiveButton("Accept",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int whichButton) {
                                     dialog.dismiss();
