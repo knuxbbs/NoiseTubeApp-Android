@@ -31,6 +31,20 @@ android {
         }
     }
     productFlavors {
+        google {
+            manifestPlaceholders = [PLAY_VERSION: "@integer/google_play_services_version"]
+        }
+        fdroid {
+            manifestPlaceholders = [PLAY_VERSION: "0"]
+        }
+    }
+    sourceSets {
+        google {
+            java.srcDirs = ['src/google/java']
+        }
+        fdroid {
+            java.srcDirs = ['src/fdroid/java']
+        }
     }
 
     packagingOptions {
@@ -47,7 +61,7 @@ android {
 
 dependencies {
     compile 'com.android.support:appcompat-v7:21.0.3'
-    compile 'com.google.android.gms:play-services:6.5.87'
+    googleCompile 'com.google.android.gms:play-services:6.5.87'
     compile 'com.android.support:support-v13:21.0.3'
     compile 'com.android.support:cardview-v7:21.0.3'
     compile fileTree(dir: 'libs', include: ['*.jar'])

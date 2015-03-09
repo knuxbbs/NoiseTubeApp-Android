@@ -12,7 +12,6 @@ import net.noisetube.app.config.AndroidPreferences;
 import net.noisetube.app.core.AndroidNTService;
 import net.noisetube.app.util.DialogUtils;
 import net.noisetube.app.util.NTUtils;
-import net.noisetube.app.util.PlayServicesUtils;
 
 public class SplashActivity extends ActionBarActivity {
 
@@ -85,21 +84,19 @@ public class SplashActivity extends ActionBarActivity {
 
     private void initApp() {
 
-        if (PlayServicesUtils.checkGooglePlaySevices(SplashActivity.this)) {
-            Intent intentAct;
-            AndroidPreferences pref = AndroidPreferences.getInstance();
-            // Check if the terms of use has been accepted; if not, show it.
-            if (!pref.isTosAccepted()) {
-                intentAct = new Intent(SplashActivity.this, WelcomeActivity.class);
+        Intent intentAct;
+        AndroidPreferences pref = AndroidPreferences.getInstance();
+        // Check if the terms of use has been accepted; if not, show it.
+        if (!pref.isTosAccepted()) {
+            intentAct = new Intent(SplashActivity.this, WelcomeActivity.class);
 
-            } else if (!pref.isAuthenticated() && !pref.hasSkippedSignIn()) {
-                intentAct = new Intent(SplashActivity.this, LoginActivity.class);
+        } else if (!pref.isAuthenticated() && !pref.hasSkippedSignIn()) {
+            intentAct = new Intent(SplashActivity.this, LoginActivity.class);
 
-            } else {
-                intentAct = new Intent(SplashActivity.this, MainActivity.class);
-            }
-            startActivity(intentAct);
-            finish();
+        } else {
+            intentAct = new Intent(SplashActivity.this, MainActivity.class);
         }
+        startActivity(intentAct);
+        finish();
     }
 }
