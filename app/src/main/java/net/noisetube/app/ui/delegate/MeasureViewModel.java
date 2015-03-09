@@ -233,7 +233,7 @@ public class MeasureViewModel {
         if (pref.isTosAccepted() && pref.isLocationRequired()) {
             body.setText(activity.getText(R.string.required_msg_login_dialog));
             dialog = new AlertDialog.Builder(activity).setView(body)
-                    .setPositiveButton(R.string.accept,
+                    .setPositiveButton("Accept",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int whichButton) {
                                     dialog.dismiss();
@@ -249,7 +249,7 @@ public class MeasureViewModel {
         } else if (pref.isTosAccepted() && pref.isLoginRequired()) {
             body.setText(activity.getText(R.string.required_msg_login_dialog));
             dialog = new AlertDialog.Builder(activity).setView(body)
-                    .setPositiveButton(R.string.accept,
+                    .setPositiveButton("Accept",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int whichButton) {
                                     dialog.dismiss();
@@ -266,7 +266,7 @@ public class MeasureViewModel {
 
             body.setText(activity.getText(R.string.warning_msg_login_dialog));
             dialog = new AlertDialog.Builder(activity).setView(body)
-                    .setPositiveButton(R.string.accept,
+                    .setPositiveButton("Accept",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int whichButton) {
                                     dialog.dismiss();

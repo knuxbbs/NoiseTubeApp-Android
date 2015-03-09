@@ -391,7 +391,9 @@ public abstract class BaseActivity extends SimpleActionBarActivity {
         mNavDrawerItems.add(NAVDRAWER_ITEM_SEPARATOR);
         mNavDrawerItems.add(NAVDRAWER_ITEM_MEASURE);
 
-        mNavDrawerItems.add(NAVDRAWER_ITEM_MAP);
+        if (!getResources().getBoolean(R.bool.isFdroid)) {
+            mNavDrawerItems.add(NAVDRAWER_ITEM_MAP);
+        }
 
 
         mNavDrawerItems.add(NAVDRAWER_ITEM_SEPARATOR);

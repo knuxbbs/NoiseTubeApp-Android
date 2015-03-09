@@ -37,8 +37,6 @@ package net.noisetube.app.location;
 import android.location.Location;
 import android.location.LocationManager;
 
-import com.google.android.gms.maps.model.LatLng;
-
 import net.noisetube.api.model.NTCoordinates;
 
 /**
@@ -139,10 +137,6 @@ public class AndroidNTCoordinates implements NTCoordinates {
 
     public AndroidNTCoordinates copy() {
         return new AndroidNTCoordinates(location.getLatitude(), location.getLongitude(), location.getAltitude());
-    }
-
-    public LatLng toGeoPoint() {
-        return new LatLng(location.getLatitude(), location.getLongitude());
     }
 
 

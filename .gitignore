@@ -45,4 +45,14 @@ local.properties
 proguard/
 # Log Files
 *.log
-
+/.idea/workspace.xml
+/.idea/libraries
+# Eclipse project files
+.classpath
+# Intellij project files
+*.iml
+*.ipr
+*.iws
+app/app.impl
+app/manifest-merger-debug-report.txt
+app/manifest-merger-release-report.txt
