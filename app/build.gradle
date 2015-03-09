@@ -5,7 +5,7 @@ android {
         release {
             keyAlias 'brussense-release'
             keyPassword 'leuvn0ns3ns3'
-            storeFile file('/Users/Humberto/AndroidStudioProjects/NoiseTubeApp/keystores/BrusSenseAndroidReleaseKey.keystore')
+            storeFile file('../keystores/BrusSenseAndroidReleaseKey.keystore')
             storePassword 'leuvn0ns3ns3'
         }
     }
