@@ -207,7 +207,7 @@ public class Logger implements Serializable {
     }
 
     public void save(String msg) {
-        Log.e("Debugging", msg);
+//        Log.e("Debugging", msg);
         if (SLMClient.ENVIRONMENT != SLMClient.PHONE_PROD_ENV)
             System.out.println(msg);
         LogEntry entry = new LogEntry(msg);

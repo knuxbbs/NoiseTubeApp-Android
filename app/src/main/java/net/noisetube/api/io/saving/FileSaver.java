@@ -41,6 +41,7 @@ import net.noisetube.api.util.XMLUtils;
 import org.xml.sax.SAXException;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -76,7 +77,9 @@ public class FileSaver extends Saver {
                     throw new NullPointerException("folderPath is null");
 
                 filePath = folderPath + "TrackID_" + getTrackID() + "_" + XMLUtils.dateToString(track.getCreatedDate()) + ".xml";
+
                 file = new File(filePath);
+
                 xml = new XMLDocument(new StreamResult(file), false, 4, null);
 
             } catch (TransformerConfigurationException e) {
