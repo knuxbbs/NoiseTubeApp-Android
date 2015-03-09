@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+ ________________________________________________________________________________
+  NoiseTube Mobile client (Java implementation; Android version)
+  
+  Copyright (C) 2008-2010 SONY Computer Science Laboratory Paris
+  Portions contributed by Vrije Universiteit Brussel (BrusSense team), 2008-2015
+  Portions contributed by University College London (ExCiteS group), 2012
+  Android port by Vrije Universiteit Brussel (BrusSense team), 2010-2015
+ ________________________________________________________________________________
+  This library is free software; you can redistribute it and/or modify it under
+  the terms of the GNU Lesser General Public License, version 2.1, as published
+  by the Free Software Foundation.
+  
+  This library is distributed in the hope that it will be useful, but WITHOUT
+  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+  FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+  details.
+  
+  You should have received a copy of the GNU Lesser General Public License along
+  with this library; if not, write to:
+    Free Software Foundation, Inc.,
+    51 Franklin Street, Fifth Floor,
+    Boston, MA  02110-1301, USA.
+  
+  Full GNU LGPL v2.1 text: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt
+  NoiseTube project source code repository: http://code.google.com/p/noisetube
+ ________________________________________________________________________________
+  More information:
+   - NoiseTube project website: http://www.noisetube.net
+   - Sony Computer Science Laboratory Paris: http://csl.sony.fr
+   - VUB BrusSense team: http://www.brussense.be
+ ________________________________________________________________________________
+-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:prompt="@string/tags_title_prompt"
+    tools:context=".ui.TagMeasureDialog">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:splitMotionEvents="false">
+
+            <TableLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="0">
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dip"
+                        android:gravity="center_vertical"
+                        android:text="@string/track_id" />
+
+                    <TextView
+                        android:id="@+id/txtTrackID"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dip"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:text="@string/unknown" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dip"
+                        android:gravity="center_vertical"
+                        android:text="@string/duration" />
+
+                    <TextView
+                        android:id="@+id/txtSummaryElapsedTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dip"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:text="00:00:00"
+                        tools:ignore="HardcodedText" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dip"
+                        android:gravity="center_vertical"
+                        android:text="@string/num_measurements" />
+
+                    <TextView
+                        android:id="@+id/txtSummaryNrOfMeasurements"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dip"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:text="0"
+                        tools:ignore="HardcodedText" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/lblSummaryMinLeq"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dip"
+                        android:gravity="center_vertical"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/txtSummaryMinLeq"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dip"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+
+                        android:text="" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/lblSummaryMaxLeq"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dip"
+                        android:gravity="center_vertical"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/txtSummaryMaxLeq"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dip"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:text="" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/lblSummaryAvgLeq"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dip"
+                        android:gravity="center_vertical"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/txtSummaryAvgLeq"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dip"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:text="" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dip"
+                        android:gravity="center_vertical"
+                        android:text="@string/distance_covered" />
+
+                    <TextView
+                        android:id="@+id/txtSummaryDistance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dip"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:text="" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/progress_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="3dp"
+                    android:paddingTop="3dp">
+
+                    <LinearLayout
+                        android:layout_span="2"
+                        android:orientation="horizontal"
+                        android:paddingRight="16dp">
+
+                        <ProgressBar
+                            android:id="@+id/uploading_progressBar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:layout_gravity="center_horizontal" />
+
+                        <TextView
+                            android:id="@+id/txtSummaryWaiting"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center|center_vertical|center_horizontal"
+                            android:textColor="#607D8B"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </TableRow>
+
+            </TableLayout>
+
+            <LinearLayout
+                android:id="@+id/action_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:gravity="center|center_horizontal"
+                android:orientation="horizontal"
+                android:paddingTop="8dp"
+                android:splitMotionEvents="false">
+
+                <Button
+                    android:id="@+id/btnSummaryOK"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="?android:selectableItemBackground"
+                    android:enabled="false"
+                    android:fontFamily="@string/font_fontFamily_medium"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:minWidth="48dp"
+                    android:text="@string/summary_ok_action"
+                    android:textAllCaps="true"
+                    android:textColor="#009688"
+                    android:textSize="@dimen/text_size_medium"
+                    android:visibility="visible" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

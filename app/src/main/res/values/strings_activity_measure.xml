@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_activity_measure">Noise Measure</string>
+    <string name="action_stop_measure">Stop</string>
+    <string name="measure_noise">Measure noise</string>
+    <string name="action_pause_measure">Pause</string>
+    <string name="action_start_measure">Start</string>
+    <string name="not_calibrated_msg">NoiseTube is not yet calibrated for your phone model. Generic setting in use, measurements are likely inaccurate. New calibration settings are downloaded automatically when they become available.</string>
+    <string name="not_calibrated_brand_msg">NoiseTube is currently not calibrated for your phone model. Brand default setting in use, measurements may be inaccurate. New calibration settings are downloaded automatically when they become available.</string>
+    <string name="calibrated_msg">Using calibration setting for your phone model for best accuracy.</string>
+    <string name="action_resume_measure">Resume</string>
+    <string name="enable_manual_tagging">Enable manual tagging</string>
+
+    <string name="manual_tagging_enabled">Session added to your schedule</string>
+    <string name="manual_tagging_disabled">Session removed from your schedule</string>
+    <string name="warning_msg_measure_dialog">Your current track do not have the minimum (30) amount of measurements. The NoiseTube server will not process this track. Select \"OK\" to continue measuring."</string>
+    <string name="disable_manual_tagging_desc">Button to enable manual measurement tagging.</string>
+    <string name="enable_manual_tagging_desc">Button to disable manual measurement tagging.</string>
+    <string name="title_login_alert_dialog">Measurement Warning</string>
+    <string name="warning_msg_microphone">Please hold your phone upside down for optimal measuring.</string>
+    <string name="warning_msg_login_dialog">You are not logged in. Measurements will not be uploaded to the website, and no maps will be generated. To change this behaviour, please login.</string>
+    <string name="required_msg_login_dialog">You need to be logged in to start measuring. To change this behaviour, please to to settings.</string>
+    <string name="required_msg_location_dialog">You need to enable GPS to map measurements. To change this behaviour, please go to phone settings. \"Not store measurements\".</string>
+    <string name="warning_msg_internet">Your measurements will be save locally, because your device do not have an internet connection.</string>
+</resources>

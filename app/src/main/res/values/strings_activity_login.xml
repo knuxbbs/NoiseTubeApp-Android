@@ -1,0 +1,22 @@
+<resources>
+    <string name="title_activity_login">Log in</string>
+
+    <!-- Strings related to login -->
+    <string name="user_and_password">Login credentials</string>
+    <string name="prompt_user">User name</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_log_in">Log in</string>
+    <string name="action_skip">Skip</string>
+    <string name="action_register">Register</string>
+
+    <string name="wrong_username_password">Wrong username-password combination</string>
+    <string name="connection_problem">Connection problem. Data will</string>
+    <string name="local_store">be stored locally</string>
+    <string name="no_store">not be stored</string>
+    <string name="preferences_changed">Preferences changed. Data will</string>
+    <string name="login_successful">Login successful</string>
+    <string name="invalid_credentials">Invalid login credentials!</string>
+    <string name="setting_info"><![CDATA[Note that tracks & locations are public by default. To change this behaviour, please go to settings.]]></string>
+    <string name="msg_internet_warning_dialog">Your device is offline. The actions Register and Login require an active Internet connection. To change this behaviour, go to settings.</string>
+    <string name="msg_stop_measure">Your current track was stopped.</string>
+</resources>

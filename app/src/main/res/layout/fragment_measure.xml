@@ -1,0 +1,136 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="net.noisetube.app.ui.MeasureFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#ffffff"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="top"
+            android:layout_marginBottom="6dp"
+            android:orientation="horizontal"
+            android:weightSum="1.0">
+
+            <net.noisetube.app.ui.widget.SPLView
+                android:id="@+id/splView"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight=".60" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="right"
+                android:layout_weight=".40"
+                android:orientation="vertical"
+                android:paddingLeft="10dp">
+
+                <TextView
+                    android:id="@+id/lblMeasuringStatus"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|left"
+                    android:paddingBottom="3dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <net.noisetube.app.ui.widget.StatisticsView
+                    android:id="@+id/statTime"
+                    android:layout_width="fill_parent"
+                    android:layout_height="10dp"
+                    android:layout_weight="1" />
+
+                <net.noisetube.app.ui.widget.StatisticsView
+                    android:id="@+id/statMinMaxAvg"
+                    android:layout_width="fill_parent"
+                    android:layout_height="10dp"
+                    android:layout_weight="1" />
+
+                <net.noisetube.app.ui.widget.StatisticsView
+                    android:id="@+id/statDistance"
+                    android:layout_width="fill_parent"
+                    android:layout_height="10dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <net.noisetube.app.ui.widget.SPLGraphView
+            android:id="@+id/splGraphView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+
+    </LinearLayout>
+
+    <!-- Button bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="bottom"
+        android:background="@color/theme_primary">
+
+        <Button
+            android:id="@+id/btn_start_measure"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?photoItemForeground"
+            android:fontFamily="@string/font_fontFamily_medium"
+            android:text="@string/action_start_measure"
+            android:textAllCaps="true"
+            android:textColor="#fff"
+            android:textSize="@dimen/text_size_medium"
+            android:textStyle="normal" />
+
+        <Button
+            android:id="@+id/btn_pause_measure"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?photoItemForeground"
+            android:fontFamily="@string/font_fontFamily_medium"
+            android:text="@string/action_pause_measure"
+            android:textAllCaps="true"
+            android:textColor="#fff"
+            android:textSize="@dimen/text_size_medium"
+            android:textStyle="normal"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btn_stop_measure"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?photoItemForeground"
+            android:fontFamily="@string/font_fontFamily_medium"
+            android:text="@string/action_stop_measure"
+            android:textAllCaps="true"
+            android:textColor="#fff"
+            android:textSize="@dimen/text_size_medium"
+            android:textStyle="normal"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <fragment
+            android:id="@+id/background_map"
+            class="com.google.android.gms.maps.MapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+</LinearLayout>

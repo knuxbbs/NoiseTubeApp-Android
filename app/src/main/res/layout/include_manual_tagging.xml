@@ -1,0 +1,22 @@
+<net.noisetube.app.ui.widget.CheckableFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/btn_manual_tagging"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:contentDescription="@string/enable_manual_tagging_desc"
+    android:focusable="true"
+    android:visibility="visible">
+
+    <ImageView
+        android:id="@+id/manual_tagging_icon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:contentDescription="@null"
+        android:src="@drawable/tagging_button_icon_unchecked" />
+
+</net.noisetube.app.ui.widget.CheckableFrameLayout>
+
+    <!--android:background="@drawable/tagging_button_background"-->
+
+

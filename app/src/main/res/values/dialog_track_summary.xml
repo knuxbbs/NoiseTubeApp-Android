@@ -1,0 +1,11 @@
+<resources>
+    <string name="title_dialog_summary">Measurements summary</string>
+    <string name="unknown">unknown</string>
+    <string name="summary_ok_action">OK</string>
+    <string name="cancel_uploading_action">Cancel</string>
+    <string name="distance_covered">Distance covered:</string>
+    <string name="num_measurements">\# measurements:</string>
+    <string name="summary_waiting_done">Saving done</string>
+    <string name="summary_waiting_failed">Saving of some of the last measurements may have failed</string>
+
+</resources>

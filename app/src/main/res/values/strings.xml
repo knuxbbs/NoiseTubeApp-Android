@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">NoiseTube</string>
+    <string name="icon_description">NoiseTube App</string>
+    <string name="ok_button">OK</string>
+    <string name="cancel_button">CANCEL</string>
+
+    <!-- NavDrawer menu items -->
+    <string name="navdrawer_item_map">Map</string>
+    <string name="navdrawer_item_measure">Measure</string>
+    <string name="navdrawer_item_my_account">My account</string>
+    <string name="navdrawer_item_my_traces">My tracks</string>
+    <string name="navdrawer_item_help_feedback">Help &amp; Feedback</string>
+    <string name="navdrawer_item_settings">Settings</string>
+    <string name="navdrawer_item_auth">Log in or Register</string>
+    <string name="navdrawer_item_logout">Logout</string>
+
+
+    <string name="title_about">About</string>
+    <!-- Shown in the 'About' window of the app. -->
+    <string name="about_body">
+<![CDATA[
+        <b>NoiseTube App</b><br>
+        %s<br><br>
+
+         <a href="http://www.noisetube.net\">NoiseTube</a> is a participatory sensing project started in 2008 at the <a href="http://www.csl.sony.fr\">Sony Computer Science Laboratory Paris</a> in collaboration with the <a href="http://www.vub.ac.be\">Vrije Universiteit Brussel</a>. Since 2010 the project is maintained by the university’s <a href="http://soft.vub.ac.be\”>Software Languages Lab</a>.
+
+		<br/><br/>
+
+	    <a href="http://code.google.com/p/noisetube\">Source code available</a> under the terms of the <a href="http://www.gnu.org/licenses/lgpl-2.1.html\">GNU LGPL v2.1</a>.<br/><br/>
+	    More information at: <a href="http://www.noisetube.net\">www.noisetube.net</a>
+
+
+
+    ]]>
+    </string>
+
+    <string name="title_help">Help</string>
+    <string name="help_body">
+     <![CDATA[
+        <b>NoiseTube App</b><br>
+        Version %s<br><br>
+
+        <a href="http://noisetube.net/downloads/NoiseTubeUserGuide.pdf">User Guide</a><br>
+         <a href="http://noisetube.net/help#faq">FAQ</a><br><br>
+
+        More information at <a href=\"http://www.noisetube.net\">www.noisetube.net</a>
+
+
+
+    ]]>
+    </string>
+
+    <string name="msg_location_warning_dialog">In order to be able to get noise maps, GPS should be enabled. Would you like to enable it?</string>
+
+
+    <!--
+    Label on a button that allows the user to cancel an operation before it starts. For
+    example, this may be a button on a dialog that says "This will delete your data."
+    -->
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+
+    <string name="splash_loading_text">Starting application ...</string>
+    <string name="action_create_account">Save</string>
+    <string name="duration">Duration:</string>
+    <string name="track_id">Track ID:</string>
+    <string name="title_activity_noise_map">Noise Map</string>
+    <string name="title_activity_my_account">My Account</string>
+    <string name="title_activity_my_traces">"My tracks "</string>
+    <string name="location_wait_msg">Please wait.... \nWe\'re trying to determine your location.</string>
+    <string name="settings">Settings</string>
+    <string name="menu_help_feedback">Help</string>
+    <string name="menu_about">About</string>
+    <string name="Username">Username</string>
+    <string name="change_avatar">Change</string>
+    <string name="change_password">Change password</string>
+    <string name="phone_calibrated">Calibrated</string>
+    <string name="phone_not_calibrated">Not calibrated</string>
+    <string name="password_changed_msg">Your password was changed.</string>
+    <string name="password_not_changed_msg">Your password could not be changed. Check your current password.</string>
+    <string name="password_not_confirmed_msg">Your passwords do not match.</string>
+    <string name="wrong_password_values_msg">Your password should be at least 6 characters long and cannot contain symbols or spaces.</string>
+    <string name="wrong_credentials_msg">Your username should be at least 3 characters long. Your password should be at least 6 characters long and cannot contain symbols or spaces</string>
+    <string name="avatar_changed_msg">Your profile image was changed.</string>
+    <string name="avatar_not_changed_msg">Your profile image could not be updated. Please check your internet connection.</string>
+    <string name="empty_msg">You do not have any tracks yet.</string>
+    <string name="continue_measuring">Continue</string>
+    <string name="server_down">Ups! NoiseTube server seems to be down. Please try in a few minutes.</string>
+
+</resources>

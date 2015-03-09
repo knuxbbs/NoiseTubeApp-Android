@@ -1,0 +1,12 @@
+<resources>
+    <string name="title_dialog_tag_measure">Tag your measurements</string>
+    <string name="tags_title_prompt">Select and/or add new tags</string>
+    <string name="type_new_tags">Enter new tags (comma separated):</string>
+    <string name="select_prev_tags">Select previously used tags:</string>
+    <string name="skip_tagging">Skip</string>
+    <string name="apply_tagging">Apply</string>
+    <string name="tags_prompt">Choose a tag</string>
+    <string name="empty_spinner">(no previous tags yet)</string>
+    <string name="label_spinner">(click to select)</string>
+    <string name="manual_tagging">Manual</string>
+</resources>

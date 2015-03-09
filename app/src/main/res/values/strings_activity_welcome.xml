@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="welcome_to_noisetube_app">Welcome to NoiseTube!</string>
+    <string name="welcome_text">Before we begin, here is some important privacy information regarding the use of NoiseTube. This will only take a minute!</string>
+    <string name="legal_text">When logged in, your measurements are uploaded to the NoiseTube website, so that you we can generate noise maps for you. When you choose to share your data publicly, it also contributes to city-wide noise maps. You can change this behaviour at any time by going to settings. Note the only thing that identifies you is your username, which you can choose freely.</string>
+    <string name="legal_text_end">Please help noise map the world by agreeing to this. Thank you!</string>
+    <string name="action_accept">Accept</string>
+    <string name="action_decline">Decline</string>
+
+
+</resources>
