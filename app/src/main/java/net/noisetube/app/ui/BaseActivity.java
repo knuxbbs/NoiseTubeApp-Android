@@ -20,7 +20,6 @@ import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
-import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -37,11 +36,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.AbsListView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import net.noisetube.R;
@@ -292,9 +289,6 @@ public abstract class BaseActivity extends SimpleActionBarActivity {
                 }
             });
 
-            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
-                navDrawer.setPadding(0, 20, 0, 0);
-            }
 
         }
 
@@ -383,7 +377,10 @@ public abstract class BaseActivity extends SimpleActionBarActivity {
 
 
         } else {
-            mNavDrawerItems.add(NAVDRAWER_ITEM_SEPARATOR_SPECIAL);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                mNavDrawerItems.add(NAVDRAWER_ITEM_SEPARATOR_SPECIAL);
+            }
+
             mNavDrawerItems.add(NAVDRAWER_ITEM_AUTHENTICATION);
         }
 
@@ -513,7 +510,6 @@ public abstract class BaseActivity extends SimpleActionBarActivity {
 
     private void goToNavDrawerItem(int item) {
         Intent intent;
-        Fragment fragment = null;
         switch (item) {
             case NAVDRAWER_ITEM_MEASURE:
                 intent = new Intent(this, MainActivity.class);
@@ -548,14 +544,7 @@ public abstract class BaseActivity extends SimpleActionBarActivity {
                 break;
             case NAVDRAWER_ITEM_LOGOUT:
                 pref.resetPreferences();
-//                Thread t  = new Thread(new Runnable() {
-//                    @Override
-//                    public void run() {
                 FileTracker.removeFiles();
-//                    }
-//                });
-//                t.start();
-
                 finish();
                 break;
         }
@@ -592,48 +581,6 @@ public abstract class BaseActivity extends SimpleActionBarActivity {
         mDrawerLayout.closeDrawer(Gravity.START);
     }
 
-
-    /**
-     * Initializes the Action Bar auto-hide (aka Quick Recall) effect.
-     */
-    private void initActionBarAutoHide() {
-        mActionBarAutoHideEnabled = true;
-        mActionBarAutoHideMinY = getResources().getDimensionPixelSize(
-                R.dimen.action_bar_auto_hide_min_y);
-        mActionBarAutoHideSensivity = getResources().getDimensionPixelSize(
-                R.dimen.action_bar_auto_hide_sensivity);
-    }
-
-
-    /**
-     * Indicates that the basic_menu content has scrolled (for the purposes of showing/hiding
-     * the action bar for the "action bar auto hide" effect). currentY and deltaY may be exact
-     * (if the underlying view supports it) or may be approximate indications:
-     * deltaY may be INT_MAX to mean "scrolled forward indeterminately" and INT_MIN to mean
-     * "scrolled backward indeterminately".  currentY may be 0 to mean "somewhere close to the
-     * start of the list" and INT_MAX to mean "we don't know, but not at the start of the list"
-     */
-    private void onMainContentScrolled(int currentY, int deltaY) {
-        if (deltaY > mActionBarAutoHideSensivity) {
-            deltaY = mActionBarAutoHideSensivity;
-        } else if (deltaY < -mActionBarAutoHideSensivity) {
-            deltaY = -mActionBarAutoHideSensivity;
-        }
-
-        if (Math.signum(deltaY) * Math.signum(mActionBarAutoHideSignal) < 0) {
-            // deltaY is a motion opposite to the accumulated signal, so reset signal
-            mActionBarAutoHideSignal = deltaY;
-        } else {
-            // add to accumulated signal
-            mActionBarAutoHideSignal += deltaY;
-        }
-
-        boolean shouldShow = currentY < mActionBarAutoHideMinY ||
-                (mActionBarAutoHideSignal <= -mActionBarAutoHideSensivity);
-        autoShowOrHideActionBar(shouldShow);
-    }
-
-
     protected void autoShowOrHideActionBar(boolean show) {
         if (show == mActionBarShown) {
             return;
@@ -641,27 +588,6 @@ public abstract class BaseActivity extends SimpleActionBarActivity {
 
         mActionBarShown = show;
         onActionBarAutoShowOrHide(show);
-    }
-
-    protected void enableActionBarAutoHide(final ListView listView) {
-        initActionBarAutoHide();
-        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
-            final static int ITEMS_THRESHOLD = 3;
-            int lastFvi = 0;
-
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                onMainContentScrolled(firstVisibleItem <= ITEMS_THRESHOLD ? 0 : Integer.MAX_VALUE,
-                        lastFvi - firstVisibleItem > 0 ? Integer.MIN_VALUE :
-                                lastFvi == firstVisibleItem ? 0 : Integer.MAX_VALUE
-                );
-                lastFvi = firstVisibleItem;
-            }
-        });
     }
 
     private View makeNavDrawerItem(final int itemId, ViewGroup container) {
@@ -723,21 +649,6 @@ public abstract class BaseActivity extends SimpleActionBarActivity {
         super.onDestroy();
     }
 
-
-    public LUtils getLUtils() {
-        return mLUtils;
-    }
-
-    public int getThemedStatusBarColor() {
-        return mThemedStatusBarColor;
-    }
-
-    public void setNormalStatusBarColor(int color) {
-        mNormalStatusBarColor = color;
-        if (mDrawerLayout != null) {
-            mDrawerLayout.setStatusBarBackgroundColor(mNormalStatusBarColor);
-        }
-    }
 
     protected void onActionBarAutoShowOrHide(boolean shown) {
         if (mStatusBarColorAnimator != null) {

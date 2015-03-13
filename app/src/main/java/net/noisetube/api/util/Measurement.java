@@ -14,6 +14,8 @@ public class Measurement implements Serializable {
     private double loudness;
 
     public Measurement() {
+        this.latitude = -1;
+        this.longitude = -1;
     }
 
     public Measurement(Date timeStamp, double loudness) {

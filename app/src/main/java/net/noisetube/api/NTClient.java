@@ -231,6 +231,9 @@ public abstract class NTClient extends SLMClient {
      * For audio classes only (they do not know about preferences)
      */
     public String getDataFolderPath() {
+        if (preferences == null) {
+            preferences = createPreferences();
+        }
         return preferences.getDataFolderPath();
     }
 

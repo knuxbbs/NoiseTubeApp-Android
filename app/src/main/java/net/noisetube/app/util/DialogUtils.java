@@ -102,6 +102,20 @@ public class DialogUtils {
 
     }
 
+    public static void showMapInternetDialog(Activity activity) {
+        FragmentManager fm = activity.getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        Fragment prev = fm.findFragmentByTag("dialog_map_internet");
+        if (prev != null) {
+            ft.remove(prev);
+        }
+        ft.addToBackStack(null);
+
+        MapInternetDialog d = new MapInternetDialog();
+        d.show(ft, "dialog_map_internet");
+
+    }
+
     public static void showLocationDialog(Activity activity) {
         FragmentManager fm = activity.getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
@@ -257,6 +271,39 @@ public class DialogUtils {
 
             TextView body = (TextView) layoutInflater.inflate(R.layout.dialog_text_view, null);
             body.setText(getActivity().getText(R.string.msg_internet_warning_dialog));
+
+
+            return new AlertDialog.Builder(getActivity()).setView(body)
+                    .setPositiveButton("Accept",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    dialog.dismiss();
+                                    startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+
+
+                                }
+                            }
+                    ).setNegativeButton(R.string.cancel,
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    dialog.cancel();
+                                }
+                            }
+                    )
+                    .create();
+        }
+    }
+
+    public static class MapInternetDialog extends DialogFragment {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+            LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(
+                    Context.LAYOUT_INFLATER_SERVICE);
+
+            TextView body = (TextView) layoutInflater.inflate(R.layout.dialog_text_view, null);
+            body.setText(getActivity().getText(R.string.msg_map_internet_warning_dialog));
 
 
             return new AlertDialog.Builder(getActivity()).setView(body)

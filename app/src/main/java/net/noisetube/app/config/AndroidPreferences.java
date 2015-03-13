@@ -124,14 +124,19 @@ public class AndroidPreferences extends Preferences {
 
             //IO
 
-            setPreferMemoryCard(settings.getBoolean(PREF_EXTERNAL_STORE, preferMemoryCard));
+            setPreferMemoryCard(settings.getBoolean(PREF_EXTERNAL_STORE, true));
+            settings.edit().putBoolean(PREF_EXTERNAL_STORE, isPreferMemoryCard()).commit();
 
             int value = Integer.valueOf(settings.getString(PREF_SAVING_MODE, "2"));
 
             if (value == 1) {// HTTP and FILE
-
-                setSavingMode(1);
-                setAlsoSaveToFileWhenInHTTPMode(true);
+                if (NTUtils.supportsInternetAccess()) {
+                    setSavingMode(1);
+                    setAlsoSaveToFileWhenInHTTPMode(true);
+                } else {
+                    setSavingMode(2);
+                    setAlsoSaveToFileWhenInHTTPMode(false);
+                }
 
             } else {
                 setSavingMode(value);

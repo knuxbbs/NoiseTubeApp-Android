@@ -199,6 +199,7 @@ public class AndroidDevice extends Device {
                 path = getInternalRoot() + relativeDataFolderPath;
         } catch (Exception e) {
             log.error(e, "datafolder could not be made");
+            path = getInternalRoot() + relativeDataFolderPath;
         }
         return path;
     }

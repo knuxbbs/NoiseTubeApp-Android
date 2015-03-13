@@ -23,6 +23,8 @@ import net.noisetube.api.ui.TrackUIAdapter;
 import net.noisetube.api.util.Measurement;
 import net.noisetube.app.location.AndroidNTCoordinates;
 import net.noisetube.app.ui.model.TrackData;
+import net.noisetube.app.util.DialogUtils;
+import net.noisetube.app.util.NTUtils;
 
 import java.util.List;
 
@@ -110,6 +112,9 @@ public class NoiseMapActivity extends BaseActivity implements OnMapReadyCallback
     @Override
     protected void onResume() {
         super.onResume();
+        if (!NTUtils.supportsInternetAccess()) {
+            DialogUtils.showMapInternetDialog(this);
+        }
     }
 
     @Override
@@ -154,9 +159,10 @@ public class NoiseMapActivity extends BaseActivity implements OnMapReadyCallback
             @Override
             public void run() {
 
-                if (measurements != null) {
-                    if (!measurements.isEmpty()) {
-                        LatLng latlng = new LatLng(measurements.get(0).getLatitude(), measurements.get(0).getLongitude());
+                if (measurements != null && !measurements.isEmpty()) {
+                    Measurement item = measurements.get(0);
+                    if (item.getLatitude() > -1 && item.getLongitude() > -1) {
+                        LatLng latlng = new LatLng(item.getLatitude(), item.getLongitude());
 
                         CameraUpdate center =
                                 CameraUpdateFactory.newLatLng(latlng);
@@ -186,18 +192,20 @@ public class NoiseMapActivity extends BaseActivity implements OnMapReadyCallback
     }
 
     private void drawNoiseMeasurement(Measurement item) {
-        int color = SoundLevelScale.getNoiseMapColor(item.getLoudness()).getARGBValue();
+        if (item.getLatitude() > -1 && item.getLongitude() > -1) {
+            int color = SoundLevelScale.getNoiseMapColor(item.getLoudness()).getARGBValue();
 
-        CircleOptions circleOptions = new CircleOptions()
-                .center(new LatLng(item.getLatitude(), item.getLongitude()))
-                .strokeWidth(1)
-                .strokeColor(color)
-                .fillColor(color)
-                .radius(1); // In meters
+            CircleOptions circleOptions = new CircleOptions()
+                    .center(new LatLng(item.getLatitude(), item.getLongitude()))
+                    .strokeWidth(1)
+                    .strokeColor(color)
+                    .fillColor(color)
+                    .radius(1); // In meters
 
-        circleOptions.zIndex(zIndex++);
+            circleOptions.zIndex(zIndex++);
 
-        mMap.addCircle(circleOptions);
+            mMap.addCircle(circleOptions);
+        }
 
     }
 }

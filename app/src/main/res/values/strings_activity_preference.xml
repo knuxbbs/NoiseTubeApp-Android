@@ -12,7 +12,7 @@
     <string name="pref_use_batch_http_title">Enable batch mode</string>
     <string name="pref_use_batch_http_description">Send your measurements in batches instead of one by one</string>
     <string name="pref_maxTrackHistory">Track history</string>
-    <string name="pref_maxTrackHistory_description">Select how many tracks you want to show in your history</string>
+    <string name="pref_maxTrackHistory_description">Select how many tracks you want to show in your local history</string>
     <string name="pref_data_policy_title">Data policy</string>
     <string name="pref_data_policy_description">Make my measurements public</string>
     <string name="title_activity_settings">Settings</string>

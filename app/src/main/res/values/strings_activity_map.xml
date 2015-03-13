@@ -2,4 +2,5 @@
 <resources>
     <string name="title_activity_map">Noise Map</string>
     <string name="action_paused_measure">Your current track was paused.</string>
+    <string name="msg_map_internet_warning_dialog">Your device is offline. This action requires an active Internet connection. To change this behaviour, go to settings.</string>
 </resources>

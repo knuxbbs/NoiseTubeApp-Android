@@ -73,14 +73,15 @@ public class TrackXMLHandler extends DefaultHandler {
 
             taggedIntervals.add(taggedInterval);
 
-        } else if (qName.equals("measurement") && attributes.getValue("location") != null) {
-            String[] values = attributes.getValue("location").split(":|,");
-
+        } else if (qName.equals("measurement")) {
             measurement = new Measurement();
             measurement.setLoudness(Double.parseDouble(attributes.getValue("loudness")));
             measurement.setTimeStamp(parseDateWithZone(attributes.getValue("timeStamp")));
-            measurement.setLatitude(Double.valueOf(values[1]));
-            measurement.setLongitude(Double.valueOf(values[2]));
+            if (attributes.getValue("location") != null) {
+                String[] values = attributes.getValue("location").split(":|,");
+                measurement.setLatitude(Double.valueOf(values[1]));
+                measurement.setLongitude(Double.valueOf(values[2]));
+            }
             measurements.add(measurement);
 
         }
