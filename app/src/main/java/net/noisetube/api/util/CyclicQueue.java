@@ -89,8 +89,9 @@ public class CyclicQueue<T> implements Serializable {
         } else if (newCapacity == 0) {
             queue.clear();
 
-        } else if (newCapacity < capacity) {
-            List<T> temp = new ArrayList<T>(queue.subList(0, newCapacity - 1));
+        } else if (newCapacity < capacity && !queue.isEmpty()) {
+            int to = (queue.size() < newCapacity) ? queue.size() - 1 : newCapacity - 1;
+            List<T> temp = new ArrayList<T>(queue.subList(0, to));
             queue.clear();
             queue.addAll(temp);
         }

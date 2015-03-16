@@ -18,7 +18,6 @@ package net.noisetube.app.ui;
 
 import android.content.ComponentName;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
@@ -27,8 +26,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import net.noisetube.R;
-import net.noisetube.api.exception.AuthenticationException;
-import net.noisetube.api.io.NTWebAPI;
 import net.noisetube.api.util.Logger;
 import net.noisetube.app.config.AndroidPreferences;
 import net.noisetube.app.core.AndroidNTService;
@@ -111,25 +108,6 @@ public class SettingsActivity extends SimpleActionBarActivity {
                 } else {
                     pref.setSavingMode(value);
                 }
-
-            } else if (key.equals("pref_data_policy")) {
-
-                AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
-                    @Override
-                    protected Void doInBackground(Void... params) {
-                        //TODO call to the update service of data policy
-                        NTWebAPI ntWebAPI = new NTWebAPI(AndroidPreferences.getInstance().getAccount());
-                        try {
-                            ntWebAPI.changeDataPolicySetting(pref.isDataPolicy());
-                        } catch (AuthenticationException e) {
-                            log.error(e, "onSharedPreferenceChanged");
-                        }
-                        return null;
-                    }
-                };
-                task.execute();
-                pref.setDataPolicy(sharedPreferences.getBoolean("pref_data_policy", true));
-
 
             } else if (key.equals("pref_maxTrackHistory")) {
                 int capacity = Integer.valueOf(sharedPreferences.getString("pref_maxTrackHistory", "10"));

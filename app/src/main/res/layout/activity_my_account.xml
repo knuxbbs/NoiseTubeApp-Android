@@ -117,9 +117,27 @@
                         android:text="Your phone&apos;s status" />
 
                     <TextView
+                        android:id="@+id/textView9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pref_data_policy_title"
+                        android:textStyle="bold" />
+
+                    <CheckBox
+                        android:id="@+id/data_policy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/pref_data_policy_description"
+                        android:textColor="@color/body_text_2"
+                        android:textSize="@dimen/text_size_small" />
+
+
+                    <TextView
                         android:id="@+id/textView4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:paddingTop="8dp"
                         android:text="Change your password"
                         android:textStyle="bold" />
 

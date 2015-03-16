@@ -7,12 +7,16 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import net.noisetube.R;
 import net.noisetube.api.NTClient;
 import net.noisetube.api.audio.calibration.Calibration;
 import net.noisetube.api.config.NTAccount;
+import net.noisetube.api.exception.AuthenticationException;
+import net.noisetube.api.io.NTWebAPI;
 import net.noisetube.app.config.AndroidPreferences;
 import net.noisetube.app.ui.delegate.MyAccountViewModel;
 import net.noisetube.app.ui.widget.BezelImageView;
@@ -32,6 +36,7 @@ public class MyAccountActivity extends BaseActivity {
     private TextView newPassword;
     private TextView repeatPassword;
     private TextView oldPassword;
+    private CheckBox dataPolicy;
     private MyAccountViewModel delegate;
 
 
@@ -52,10 +57,11 @@ public class MyAccountActivity extends BaseActivity {
         newPassword = (TextView) findViewById(R.id.new_password);
         repeatPassword = (TextView) findViewById(R.id.repeat_new_password);
         oldPassword = (TextView) findViewById(R.id.old_password);
+        dataPolicy = (CheckBox) findViewById(R.id.data_policy);
 
         avatar = (BezelImageView) findViewById(R.id.user_profile_image);
 
-        AndroidPreferences pref = AndroidPreferences.getInstance();
+        final AndroidPreferences pref = AndroidPreferences.getInstance();
         NTAccount account = pref.getAccount();
         user_name.setText(account.getUsername());
         user_api_key.setText(account.getAPIKey());
@@ -96,7 +102,28 @@ public class MyAccountActivity extends BaseActivity {
             }
         });
 
+        dataPolicy.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
+                AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+                    @Override
+                    protected Void doInBackground(Void... params) {
+                        //TODO call to the update service of data policy
+                        NTWebAPI ntWebAPI = new NTWebAPI(AndroidPreferences.getInstance().getAccount());
+                        try {
+                            ntWebAPI.changeDataPolicySetting(isChecked);
+                            pref.setDataPolicy(isChecked);
+                        } catch (AuthenticationException e) {
+                            log.error(e, "onSharedPreferenceChanged");
+                        }
+                        return null;
+                    }
+                };
+                task.execute();
+            }
+        });
 
+        dataPolicy.setChecked(pref.isDataPolicy());
     }
 
     private void takePhoto() {
