@@ -89,11 +89,6 @@ public class AndroidNTService extends Service {
         return instance;
     }
 
-    public void clearBuffer() {
-        noiseMapMeasureBuffer.clear();
-
-    }
-
     /**
      * Called when the service is first created.
      */
@@ -177,8 +172,15 @@ public class AndroidNTService extends Service {
 
     public Track newTrack() {
         track = new Track();
-        nonLocatedMeasurements.clear();
-        noiseMapMeasureBuffer.clear();
+        if (nonLocatedMeasurements != null)
+            nonLocatedMeasurements.clear();
+        else
+            nonLocatedMeasurements = new CyclicQueue<Measurement>(5);
+        if (noiseMapMeasureBuffer != null)
+            noiseMapMeasureBuffer.clear();
+        else
+            noiseMapMeasureBuffer = new ArrayList<Measurement>();
+
         track.addTrackUIListener(adapter);
         userTraces.offer(new TrackData(track.getCreatedDate()));
         return track;
@@ -300,6 +302,8 @@ public class AndroidNTService extends Service {
                                             }
                                         } catch (AuthenticationException e) {
                                             log.error(e, "AndroidNTService - Uploading pending tracks");
+                                        } catch (NullPointerException e) {
+                                            log.error(e, "AndroidNTService");
                                         }
                                     }
                                 }

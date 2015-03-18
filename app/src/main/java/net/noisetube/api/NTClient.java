@@ -135,6 +135,10 @@ public abstract class NTClient extends SLMClient {
      * @return the preferences
      */
     public Preferences getPreferences() {
+        if (preferences == null) {
+            preferences = createPreferences();
+        }
+
         return preferences;
     }
 
