@@ -219,7 +219,11 @@ public class AndroidNTService extends Service {
     }
 
     public ArrayList<TrackData> getUserMeasurementsTraces() {
-        return new ArrayList<TrackData>(userTraces.getValues());
+        ArrayList<TrackData> list = new ArrayList<TrackData>();
+        if (userTraces != null) {
+            list.addAll(userTraces.getValues());
+        }
+        return list;
     }
 
     public void logUserMeasurement(int trackHashCode, Measurement item) {

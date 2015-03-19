@@ -16,12 +16,10 @@
 
 package net.noisetube.app.ui;
 
-import android.content.ComponentName;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.support.v4.content.IntentCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -48,9 +46,10 @@ public class SettingsActivity extends SimpleActionBarActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navigateUpToFromChild(SettingsActivity.this,
-                        IntentCompat.makeMainActivity(new ComponentName(SettingsActivity.this,
-                                MainActivity.class)));
+//                navigateUpToFromChild(SettingsActivity.this,
+//                        IntentCompat.makeMainActivity(new ComponentName(SettingsActivity.this,
+//                                MainActivity.class)));
+                SettingsActivity.this.finish();
             }
         });
 

@@ -27,43 +27,47 @@ public class MyTracesViewModel {
 
     public MyTracesViewModel(MyTracesActivity activity) {
         this.activity = activity;
-        service = AndroidNTService.getInstance();
+
     }
 
     public void populateTraceItems() {
         ViewGroup container = (ViewGroup) activity.findViewById(R.id.trace_items_list);
+        service = AndroidNTService.getInstance();
 
-        List<TrackData> traces = service.getUserMeasurementsTraces();
-        if (!traces.isEmpty())
-            activity.hideEmptyMessage();
+        if (service != null) {
+            List<TrackData> traces = service.getUserMeasurementsTraces();
+            if (!traces.isEmpty())
+                activity.hideEmptyMessage();
 
-        Comparator<TrackData> comparator = new Comparator<TrackData>() {
-            @Override
-            public int compare(TrackData lhs, TrackData rhs) {
+            Comparator<TrackData> comparator = new Comparator<TrackData>() {
+                @Override
+                public int compare(TrackData lhs, TrackData rhs) {
 
-                long lhsTime = lhs.getCreationDate().getTime();
-                long rhsTime = rhs.getCreationDate().getTime();
-                if (lhsTime < rhsTime) {
-                    return 1;
-                } else if (lhsTime > rhsTime) {
-                    return -1;
-                } else {
-                    return 0;
+                    long lhsTime = lhs.getCreationDate().getTime();
+                    long rhsTime = rhs.getCreationDate().getTime();
+                    if (lhsTime < rhsTime) {
+                        return 1;
+                    } else if (lhsTime > rhsTime) {
+                        return -1;
+                    } else {
+                        return 0;
+                    }
                 }
+            };
+
+
+            Collections.sort(traces, comparator);
+            final int to = traces.size() - 1;
+            for (int i = 0; i < to; i++) {
+                container.addView(makeTraceItem(traces.get(i), container));
+                container.addView(makeTraceSeparator(container));
             }
-        };
 
-
-        Collections.sort(traces, comparator);
-        final int to = traces.size() - 1;
-        for (int i = 0; i < to; i++) {
-            container.addView(makeTraceItem(traces.get(i), container));
-            container.addView(makeTraceSeparator(container));
+            if (to >= 0) {
+                container.addView(makeTraceItem(traces.get(to), container));
+            }
         }
 
-        if (to >= 0) {
-            container.addView(makeTraceItem(traces.get(to), container));
-        }
 
     }
 
