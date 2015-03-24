@@ -172,16 +172,22 @@ public class AndroidNTService extends Service {
 
     public Track newTrack() {
         track = new Track();
+
         if (nonLocatedMeasurements != null)
             nonLocatedMeasurements.clear();
         else
             nonLocatedMeasurements = new CyclicQueue<Measurement>(5);
+
         if (noiseMapMeasureBuffer != null)
             noiseMapMeasureBuffer.clear();
         else
             noiseMapMeasureBuffer = new ArrayList<Measurement>();
 
         track.addTrackUIListener(adapter);
+
+        if (userTraces == null)
+            userTraces = new CyclicQueue<TrackData>(preferences.getTrackHistoryValue());
+
         userTraces.offer(new TrackData(track.getCreatedDate()));
         return track;
     }

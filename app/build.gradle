@@ -15,7 +15,7 @@ android {
         applicationId "net.noisetube"
         minSdkVersion 14
         targetSdkVersion 21
-        versionCode 36
+        versionCode 37
         versionName '2.0.0'
         signingConfig signingConfigs.release
     }

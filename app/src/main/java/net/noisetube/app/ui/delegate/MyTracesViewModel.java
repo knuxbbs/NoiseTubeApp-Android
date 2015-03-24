@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.noisetube.R;
+import net.noisetube.api.util.Logger;
 import net.noisetube.app.core.AndroidNTService;
 import net.noisetube.app.ui.MyTracesActivity;
 import net.noisetube.app.ui.NoiseMapActivity;
@@ -31,10 +32,11 @@ public class MyTracesViewModel {
     }
 
     public void populateTraceItems() {
-        ViewGroup container = (ViewGroup) activity.findViewById(R.id.trace_items_list);
-        service = AndroidNTService.getInstance();
 
-        if (service != null) {
+        try {
+            ViewGroup container = (ViewGroup) activity.findViewById(R.id.trace_items_list);
+            service = AndroidNTService.getInstance();
+
             List<TrackData> traces = service.getUserMeasurementsTraces();
             if (!traces.isEmpty())
                 activity.hideEmptyMessage();
@@ -66,6 +68,9 @@ public class MyTracesViewModel {
             if (to >= 0) {
                 container.addView(makeTraceItem(traces.get(to), container));
             }
+
+        } catch (NullPointerException e) {
+            Logger.getInstance().error(e, "populateTraceItems");
         }
 
 

@@ -73,8 +73,10 @@ public class CyclicQueue<T> implements Serializable {
     }
 
     public void clear() {
-
-        this.queue.clear();
+        if (queue != null)
+            this.queue.clear();
+        else
+            this.queue = new ArrayList<T>(DEFAULT_CAPACITY);
     }
 
     public int getCapacity() {
@@ -125,13 +127,15 @@ public class CyclicQueue<T> implements Serializable {
      * full, null if it was not
      */
     public T offer(T o) {
-
         T dropped = null;
-        if (isFull()) {
-            dropped = queue.remove(0);
+        if (queue != null) {
+            if (isFull()) {
+                dropped = queue.remove(0);
+            }
+            queue.add(o);
+        } else {
+            this.queue = new ArrayList<T>(DEFAULT_CAPACITY);
         }
-        queue.add(o);
-
         return dropped;
     }
 

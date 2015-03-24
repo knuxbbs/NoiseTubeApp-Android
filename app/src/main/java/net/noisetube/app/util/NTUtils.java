@@ -15,7 +15,11 @@ public class NTUtils {
 
     // require that the AndroidNTService be running
     public static boolean supportsInternetAccess() {
-        return AndroidNTClient.getInstance().getDevice().supportsInternetAccess();
+        try {
+            return AndroidNTClient.getInstance().getDevice().supportsInternetAccess();
+        } catch (NullPointerException e) {
+            return false;
+        }
     }
 
     // require that the AndroidNTService be running
