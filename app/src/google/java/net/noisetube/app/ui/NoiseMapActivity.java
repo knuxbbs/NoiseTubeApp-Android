@@ -21,6 +21,7 @@ import net.noisetube.api.model.SoundLevelScale;
 import net.noisetube.api.model.Track;
 import net.noisetube.api.ui.TrackUIAdapter;
 import net.noisetube.api.util.Measurement;
+import net.noisetube.app.core.AndroidNTService;
 import net.noisetube.app.location.AndroidNTCoordinates;
 import net.noisetube.app.ui.model.TrackData;
 import net.noisetube.app.util.DialogUtils;
@@ -70,25 +71,30 @@ public class NoiseMapActivity extends BaseActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_noise_map);
 
-        Track track = androidNTService.getTrack();
-        Object obj = getIntent().getSerializableExtra("TRACK");
-        if (obj != null) {
+        androidNTService = AndroidNTService.getInstance();
 
-            if (track != null && track.isRunning()) {
-                track.pause();
-                Toaster.displayShortToast(String.valueOf(getResources().getText(R.string.action_paused_measure)));
+        if (androidNTService != null) {
+
+            Track track = androidNTService.getTrack();
+            Object obj = getIntent().getSerializableExtra("TRACK");
+            if (obj != null) {
+
+                if (track != null && track.isRunning()) {
+                    track.pause();
+                    Toaster.displayShortToast(String.valueOf(getResources().getText(R.string.action_paused_measure)));
+                }
+
+                TrackData item = (TrackData) obj;
+                measurements = item.getMeasurements();
+
+                findViewById(R.id.details_container).setVisibility(View.VISIBLE);
+                ((TextView) findViewById(R.id.track_id)).setText(item.getId());
+                ((TextView) findViewById(R.id.total_measurements)).setText(String.valueOf(item.getTotalMeasurements()));
+
+            } else if (track != null) {
+                track.addTrackUIListener(adapter);
+                findViewById(R.id.status_container).setVisibility(View.VISIBLE);
             }
-
-            TrackData item = (TrackData) obj;
-            measurements = item.getMeasurements();
-
-            findViewById(R.id.details_container).setVisibility(View.VISIBLE);
-            ((TextView) findViewById(R.id.track_id)).setText(item.getId());
-            ((TextView) findViewById(R.id.total_measurements)).setText(String.valueOf(item.getTotalMeasurements()));
-
-        } else if (track != null) {
-            track.addTrackUIListener(adapter);
-            findViewById(R.id.status_container).setVisibility(View.VISIBLE);
         }
 
 
