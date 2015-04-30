@@ -62,7 +62,10 @@ public class UserLoginTask extends AsyncTask<Void, String, Integer> {
     @Override
     protected void onPostExecute(final Integer result) {
         Intent intent;
-        dialog.dismiss();
+        if (dialog != null && dialog.isVisible()) {
+            dialog.dismiss();
+        }
+
         switch (result) {
             case LoginModel.LOGIN_OK:
                 Toaster.displayShortToast(activity.getResources().getString(R.string.login_successful));

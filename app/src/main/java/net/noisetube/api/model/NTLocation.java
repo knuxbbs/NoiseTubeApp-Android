@@ -77,7 +77,7 @@ public class NTLocation implements Serializable {
     }
 
     public String toString() {
-        if (coordinates != null)
+        if (hasCoordinates())
             return "geo:" + Double.toString(coordinates.getLatitude()) + "," + Double.toString(coordinates.getLongitude());
         else
             return locationTag;

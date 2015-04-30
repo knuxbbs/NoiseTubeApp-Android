@@ -46,7 +46,7 @@ public class NoiseMapActivity extends BaseActivity implements OnMapReadyCallback
                     if (mMap != null) {
                         NTLocation location = newMeasurement.getLocation();
 
-                        if (location != null && location.getCoordinates() != null && ((AndroidNTCoordinates) location.getCoordinates()).getLocation() != null) {
+                        if (location != null && location.hasCoordinates()) {
                             final AndroidNTCoordinates coordinates = (AndroidNTCoordinates) location.getCoordinates();
                             onMyLocationChange(coordinates.getLocation());
                             Measurement item = new Measurement(newMeasurement.getTimeStamp(), coordinates.getLatitude(), coordinates.getLongitude(), newMeasurement.getLeqDBA());
