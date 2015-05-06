@@ -36,7 +36,6 @@ package net.noisetube.app.config;
 
 import android.content.ContextWrapper;
 import android.content.SharedPreferences;
-import android.location.Location;
 import android.preference.PreferenceManager;
 
 import net.noisetube.api.NTClient;
@@ -64,22 +63,26 @@ public class AndroidPreferences extends Preferences {
     private static final String TAGS = "pref_tags_list";
     private static final String PREF_PAUSE_BACKGROUND = "pref_pause_background";
     private static final String USE_BATCH_HTTP = "pref_use_batch_http";
-    private static final String PREF_SAVE_TO_FILE_WHEN_HTTP = "pref_save_http";
+    //    private static final String PREF_SAVE_TO_FILE_WHEN_HTTP = "pref_save_http";
     private static final String PREF_SAVING_MODE = "pref_measureDataStore";
     private static final String PREF_EXTERNAL_STORE = "pref_external_store";
     private static final String PREF_DATA_POLICY = "pref_data_policy";
     private static final String PREF_MAX_TRACK_HISTORY = "pref_maxTrackHistory";
     private static final String TAG_SEPARATOR = " ";
     private static final String PREF_ACTIVE_ACCOUNT = "pref_active_account";
+    private static final String PREF_NO_STORE = "pref_no_store";
+    private static final String PREF_LOCAL_STORE = "pref_local_store";
+    private static final String PREF_NOISETUBE_STORE = "pref_noisetube_store";
+
+
     private static SharedPreferences settings = null;
     private static AndroidPreferences instance;
+
 
     private boolean tosAccepted = false;
     private boolean skippedSignIn = true;
     private boolean welcomeDone = false;
     private boolean calibrationStatusDone = false;
-
-    private Location lastKnownLocation;
 
 
     public AndroidPreferences(ContextWrapper ctx) {
@@ -127,27 +130,36 @@ public class AndroidPreferences extends Preferences {
             setPreferMemoryCard(settings.getBoolean(PREF_EXTERNAL_STORE, true));
             settings.edit().putBoolean(PREF_EXTERNAL_STORE, isPreferMemoryCard()).commit();
 
-            int value = Integer.valueOf(settings.getString(PREF_SAVING_MODE, "2"));
+//            int value = Integer.valueOf(settings.getString(PREF_SAVING_MODE, "2"));
 
-            if (value == 1) {// HTTP and FILE
+            boolean pref_local_store = settings.getBoolean(PREF_LOCAL_STORE, true);
+            boolean pref_noisetube_store = settings.getBoolean(PREF_NOISETUBE_STORE, true);
+
+            if (pref_local_store && pref_noisetube_store) {// HTTP and FILE
                 if (NTUtils.supportsInternetAccess()) {
-                    setSavingMode(1);
+                    setSavingMode(Preferences.SAVE_HTTP); // HTTP
                     setAlsoSaveToFileWhenInHTTPMode(true);
                 } else {
-                    setSavingMode(2);
-                    setAlsoSaveToFileWhenInHTTPMode(false);
+                    setSavingMode(Preferences.SAVE_FILE); // FILE
+//                    setAlsoSaveToFileWhenInHTTPMode(false);
+                    settings.edit().putBoolean("pref_noisetube_store", false).commit(); // updating file config
                 }
 
+            } else if (pref_local_store) {
+                setSavingMode(Preferences.SAVE_FILE); // FILE
+            } else if (pref_noisetube_store) {
+                setSavingMode(Preferences.SAVE_HTTP); // FILE
             } else {
-                setSavingMode(value);
-                setAlsoSaveToFileWhenInHTTPMode(false);
+                setSavingMode(Preferences.SAVE_NO);
+//                setAlsoSaveToFileWhenInHTTPMode(false);
             }
 
-            setAlsoSaveToFileWhenInHTTPMode(settings.getBoolean(PREF_SAVE_TO_FILE_WHEN_HTTP, alsoSaveToFileWhenInHTTPMode));
-            setAlwaysUseBatchModeForHTTP(settings.getBoolean(USE_BATCH_HTTP, alwaysUseBatchModeForHTTP));
+            //setAlsoSaveToFileWhenInHTTPMode(settings.getBoolean(PREF_SAVE_TO_FILE_WHEN_HTTP, alsoSaveToFileWhenInHTTPMode));
+
+//            setAlwaysUseBatchModeForHTTP(settings.getBoolean(USE_BATCH_HTTP, alwaysUseBatchModeForHTTP));
 
             //UI
-            setPauseWhenInBackground(settings.getBoolean(PREF_PAUSE_BACKGROUND, pauseWhenInBackground));
+//            setPauseWhenInBackground(settings.getBoolean(PREF_PAUSE_BACKGROUND, pauseWhenInBackground));
 
             //TAGS
             for (String tag : settings.getString(TAGS, "").split(TAG_SEPARATOR))
@@ -163,17 +175,6 @@ public class AndroidPreferences extends Preferences {
                     calibration = parsedCal;
             }
 
-            String location = settings.getString(PREF_LAST_KNOWN_LOCATION, null);
-
-            lastKnownLocation = new Location("");
-            if (location != null) {
-                String[] array = location.split(",");
-                lastKnownLocation.setAltitude(Double.valueOf(array[0]));
-                lastKnownLocation.setAltitude(Double.valueOf(array[1]));
-            } else {
-                lastKnownLocation.setAltitude(0);
-                lastKnownLocation.setAltitude(0);
-            }
         } catch (Exception e) {
             log.error(e, "AndroidPreferences.java -- loadFromStorage");
         }
@@ -181,7 +182,10 @@ public class AndroidPreferences extends Preferences {
 
     public void resetPreferences() {
         SharedPreferences.Editor editor = settings.edit();
-        editor.putString(PREF_SAVING_MODE, "2");
+        editor.putBoolean(PREF_LOCAL_STORE, true);
+        editor.putBoolean(PREF_NOISETUBE_STORE, true);
+        editor.putBoolean(PREF_EXTERNAL_STORE, true);
+        editor.putBoolean(PREF_NO_STORE, false);
         editor.putBoolean(PREF_TOS_ACCEPTED, false);
         editor.putBoolean(PREF_SKIPPED_SIGNIN, false);
         editor.putBoolean(PREF_CALIBRATION_STATUS_DONE, false);
@@ -191,18 +195,8 @@ public class AndroidPreferences extends Preferences {
 
     }
 
-    public void saveLastLocation(Location lastKnownLocation) {
-        this.lastKnownLocation = lastKnownLocation;
-        String location = ((int) lastKnownLocation.getLatitude()) + "," + ((int) lastKnownLocation.getAltitude());
-        settings.edit().putString(PREF_LAST_KNOWN_LOCATION, location).commit();
-    }
-
-    public Location getLastKnownLocation() {
-        return lastKnownLocation;
-    }
-
     public boolean isLoginRequired() {
-        return (savingMode == Preferences.SAVE_HTTP && !alsoSaveToFileWhenInHTTPMode && !isAuthenticated());
+        return (savingMode == Preferences.SAVE_HTTP && !isAuthenticated());
     }
 
     public boolean isLocationRequired() {

@@ -143,7 +143,6 @@ public class Track implements Pausable, MeasurementListener {
 
             addProcessor(geoTagger); // Do not move this behind CoordinateInterpolator
 
-
             if (preferences.isUseCoordinateInterpolation())
                 addProcessor(new CoordinateInterpolator());
             if (preferences.isUseDoseMeter()) {
@@ -336,6 +335,7 @@ public class Track implements Pausable, MeasurementListener {
         log.info("Stopping track...");
         slm.stop();
         geoTagger.stop();
+
         if (saver != null) {
             flushBuffer(); // !!!
             saver.stop(); // don't move this before flushBuffer!
@@ -360,6 +360,7 @@ public class Track implements Pausable, MeasurementListener {
 
         for (TrackUI listener : listeners) {
             listener.measuringStopped(this);
+
         }
 
 

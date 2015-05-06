@@ -42,7 +42,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.IBinder;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 
 import net.noisetube.api.config.NTAccount;
 import net.noisetube.api.exception.AuthenticationException;
@@ -135,7 +134,6 @@ public class AndroidNTService extends Service {
 
         track = null;
 
-        Log.e("track", "Exiting NoiseTube Mobile\n\n");
         log.disableFileMode();
         //Make sure the client is properly disposed of (static variables are set to null etc).
         androidNTClient.dispose();

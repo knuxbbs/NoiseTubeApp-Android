@@ -71,7 +71,6 @@ public class MeasureModel {
     }
 
 
-
     public void unregisterListener() {
         if (track != null)
             track.removeTrackUIListener(ui);

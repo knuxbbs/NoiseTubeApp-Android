@@ -95,9 +95,10 @@ public class FileTracker {
             final int length = traces.length;
             if (max > length) {
                 max = length;
-            } else {
-                removeOlderTracks(traces, max, length);
             }
+//            else {
+//                removeOlderTracks(traces, max, length);
+//            }
 
             CyclicQueue<TrackData> userTraces = new CyclicQueue<TrackData>(preferences.getTrackHistoryValue());
 

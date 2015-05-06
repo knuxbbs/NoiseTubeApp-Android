@@ -63,7 +63,7 @@ public class Filter {
 
     static {
         /*
-		 * A-Weighting coefficients were computed with MatLab using the "adsgn" function from
+         * A-Weighting coefficients were computed with MatLab using the "adsgn" function from
 		 * the "octave" toolbox by Christophe Couvreur (Faculte Polytechnique de Mons):
 		 * 		http://www.mathworks.com/matlabcentral/fileexchange/69
 		 * Alternatively they can also be computed with Python (with numpy and scipy libraries)
@@ -156,7 +156,7 @@ public class Filter {
                                 0.23430179229951273D}));
 
 		/*
-		 * TODO predefine C-weighting filters
+         * TODO predefine C-weighting filters
 		 * C-Weighting coefficients can be computed with MatLab using the "cdsgn" script from
 		 * the "octave" library by Christophe Couvreur (Faculte Polytechnique de Mons):
 		 * 		http://www.mathworks.com/matlabcentral/fileexchange/69

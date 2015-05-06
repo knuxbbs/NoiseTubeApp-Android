@@ -160,38 +160,39 @@ public class HttpSaver extends Saver implements Runnable, ErrorCallback {
                 if (!(queuedObject instanceof Saveable))
                     break; // got "stopper" object: break out the while loop
                 else {
-                    if (!recoveryMode && !batchMode) {
-                        api.sendData(track, (Saveable) queuedObject); // send
-                        // single
-                        // savable
-                        // (measurement/taggedinterval)
-                        // directly
-                    } else {
-                        cache.cache((Saveable) queuedObject); // cache the
-                        // savable
-                        // (measurement/taggedinterval)
-                        // as JSON for
-                        // batch sending
-                        queuedObject = null; // so it is not re-added in the
-                        // catch-block below
-                        if (cache.getSize() % 30 == 0) // try to send cache
-                        // contents in one batch
-                        // every 30 measurements
+//                    if (!recoveryMode && !batchMode) {
+//                        api.sendData(track, (Saveable) queuedObject); // send
+//                        // single
+//                        // savable
+//                        // (measurement/taggedinterval)
+//                        // directly
+//                    } else {
+
+                    cache.cache((Saveable) queuedObject); // cache the
+                    // savable
+                    // (measurement/taggedinterval)
+                    // as JSON for
+                    // batch sending
+                    queuedObject = null; // so it is not re-added in the
+                    // catch-block below
+                    if (cache.getSize() % 30 == 0) // try to send cache
+                    // contents in one batch
+                    // every 30 measurements
+                    {
+                        if (recoveryMode && !batchMode)
+                            log.debug("HttpSaver: Connection recovery attempt: trying to send data");
+                        api.sendBatch(track, cache); // clears the cache if
+                        // successful,
+                        // throws an
+                        // exception
+                        // otherwise
+                        if (recoveryMode) // connection recovered
                         {
-                            if (recoveryMode && !batchMode)
-                                log.debug("HttpSaver: Connection recovery attempt: trying to send data");
-                            api.sendBatch(track, cache); // clears the cache if
-                            // successful,
-                            // throws an
-                            // exception
-                            // otherwise
-                            if (recoveryMode) // connection recovered
-                            {
-                                recoveryMode = false;
-                                log.debug("HttpSaver: Connection recovered, cache deactivated");
-                            }
+                            recoveryMode = false;
+                            log.debug("HttpSaver: Connection recovered, cache deactivated");
                         }
                     }
+//                    }
                 }
             } catch (Exception e) {
                 enableRecoveryMode(e, "Error in sending loop");

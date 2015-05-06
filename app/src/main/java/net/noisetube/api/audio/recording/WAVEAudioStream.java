@@ -175,9 +175,9 @@ public class WAVEAudioStream extends AudioStream {
         //read the SubChunk1Size (should be = 16, 18 or 40)
         subChunk1Size = readUnsignedInt(16);
         headerSize =	/*RIFF type chunk: */                12 +
-						/*First 2 fields of Format chunk*/    8 +
-						/*remainder of the Format chunk*/    (int) subChunk1Size +
-						/*First 2 fields of the Data chunk*/ 8;
+                        /*First 2 fields of Format chunk*/    8 +
+                        /*remainder of the Format chunk*/    (int) subChunk1Size +
+                        /*First 2 fields of the Data chunk*/ 8;
 
         //Check beginning of the Format chunk
         if (!subChunk1ID.equals("fmt "))
@@ -323,7 +323,7 @@ public class WAVEAudioStream extends AudioStream {
                 " | bitsPerSample: " + bitsPerSample + " bits" +
                 " | blockAlign: " + blockAlign +
                 " | subChunk2Size (sample data): " + subChunk2Size + " Bytes" +
-				/*" | real size: " + (rawData.length - HEADER_SIZE) + " Bytes" +*/
+                /*" | real size: " + (rawData.length - HEADER_SIZE) + " Bytes" +*/
                 " | elapsed time: " + Math.floor(getLengthSeconds() * 1000f) + "ms"
 				/*+ " | elasped time (real): " + MathME.round(((float) (rawData.length - HEADER_SIZE) / (float) byteRate) * 1000f) + "ms"*/;
     }

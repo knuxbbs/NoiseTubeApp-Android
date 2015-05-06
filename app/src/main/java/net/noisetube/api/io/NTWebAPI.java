@@ -283,7 +283,6 @@ public class NTWebAPI extends SLMWebAPI {
     public void startTrack(Track track) throws Exception {
         if (authenticated()) {
             String url = apiBaseURL + "newsession?key=" + account.getAPIKey() + "&" + track.getMetaDataString("=", "&", true, new URLUTF8Encoder.URLStringEncoder());
-            //log.debug("Starting new track (" + url + ")");
             String response;
             try {
                 response = httpClient.getRequest(url);
@@ -331,7 +330,6 @@ public class NTWebAPI extends SLMWebAPI {
 
             //Build URL:
             String url = apiBaseURL + action + "?" + saveable.toUrl() + "&track=" + track.getTrackID() + "&key=" + account.getAPIKey();
-            //log.debug("Sending data: " + url);
 
             //Send:
             try {

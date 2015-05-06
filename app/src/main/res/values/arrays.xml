@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="pref_measureDataStore_entries">
-        <item>Save locally and at NoiseTube.net </item>
-        <item>Save to local file</item>
-        <item>Do not store measurements</item>
-    </string-array>
-    <string-array name="pref_measureDataStore_values">
-        <item>1</item>
-        <item>2</item>
-        <item>0</item>
-    </string-array>
+    <!--<string-array name="pref_measureDataStore_entries">-->
+    <!--<item>Save to NoiseTube.net </item>-->
+    <!--<item>Save to local file</item>-->
+    <!--<item>Do not store measurements</item>-->
+    <!--</string-array>-->
+    <!--<string-array name="pref_measureDataStore_values">-->
+    <!--<item>1</item>-->
+    <!--<item>2</item>-->
+    <!--<item>0</item>-->
+    <!--</string-array>-->
 
     <string-array name="pref_maxTrackHistory_entries">
         <item>0  tracks</item>

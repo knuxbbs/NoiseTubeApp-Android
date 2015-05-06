@@ -100,6 +100,7 @@ public class AndroidHttpClient extends HttpClient {
         //HttpConnectionParams.setSoTimeout(httpParameters, timeout); //Set the default socket timeout in milliseconds which is the timeout for waiting for data.
         //ConnManagerParams.setTimeout(httpParameters, timeout);
 
+
         final SchemeRegistry registry = new SchemeRegistry();
         registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
         //SSLSocketFactory sslSocketFactory = SSLSocketFactory.getSocketFactory();
@@ -179,8 +180,6 @@ public class AndroidHttpClient extends HttpClient {
             } else {
                 throw new IOException("HTTP response code: " + response.getStatusLine().getStatusCode());
             }
-
-
         } catch (RuntimeException re) {
             if (httpPost != null)
                 httpPost.abort(); //!!!
@@ -221,14 +220,6 @@ public class AndroidHttpClient extends HttpClient {
             FileBody bin = new FileBody(tmp);
             builder.addPart("file", bin);
             builder.addPart("key", new StringBody(userKey, ContentType.TEXT_PLAIN));
-
-            /* Building the content of the post */
-//            MultipartEntity reqEntity = new MultipartEntity();
-//            FileBody bin = new FileBody(tmp);
-//            reqEntity.addPart("file", bin);
-//
-//            reqEntity.addPart("key",new StringBody(userKey));
-//            httpPost.setEntity(reqEntity);
 
             httpPost.setEntity(builder.build());
 
@@ -351,7 +342,9 @@ public class AndroidHttpClient extends HttpClient {
         try {
             httpGet = new HttpGet(url);
             httpGet.setHeader("User-Agent", agent);
+
             HttpResponse response = httpClient.execute(httpGet);
+
             if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK)
                 throw new IOException("HTTP response code: " + response.getStatusLine().getStatusCode());
             entity = response.getEntity();

@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -334,6 +335,7 @@ public class MeasureFragment extends Fragment implements TrackUI, NotificationLi
 
     @Override
     public void measuringStopped(Track track) {
+        Log.e("measuringStopped", " " + track.getMeasurementsList().size());
         try {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
@@ -345,18 +347,20 @@ public class MeasureFragment extends Fragment implements TrackUI, NotificationLi
                         statMinMaxAvg.setText("00/00/00");
                         statDistance.setText("0 m");
                         splView.reset();
-                        graphView.invalidate();
+                        graphView.reset();
                         btnStart.setVisibility(View.VISIBLE);
                         btnStart.setEnabled(true);
                         btnPauseResume.setVisibility(View.GONE);
                         btnStop.setVisibility(View.GONE);
                     } catch (Exception e) {
+                        Log.e("measuringStopped-1", " " + e.toString());
                         log.error(e, "measuringResumed Error");
                     }
                 }
             });
 
         } catch (NullPointerException e) {
+
             log.error(e, "MeasureFragment.measuringStarted()");
         }
 

@@ -72,8 +72,8 @@ public abstract class Preferences implements Serializable {
     //IO
     protected boolean preferMemoryCard = true;                //YES
     protected String dataFolderPath = null;                    //NO!
-    protected boolean alsoSaveToFileWhenInHTTPMode = true;    //YES
-    protected boolean alwaysUseBatchModeForHTTP = false;    //YES
+    protected boolean alsoSaveToFileWhenInHTTPMode = false;    //YES
+    protected boolean alwaysUseBatchModeForHTTP = true;    //YES
 
     //AUDIO
     protected Calibration calibration;                        //YES, if manually changed
@@ -119,7 +119,7 @@ public abstract class Preferences implements Serializable {
         else
             savingMode = SAVE_NO;
 
-        alsoSaveToFileWhenInHTTPMode = true;
+        alsoSaveToFileWhenInHTTPMode = false;
 
         useDoseMeter = false;
 

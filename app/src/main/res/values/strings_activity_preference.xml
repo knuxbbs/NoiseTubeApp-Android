@@ -3,17 +3,23 @@
     <string name="pref_storage_title">Storage</string>
     <string name="pref_measureDataStore">Data storage</string>
     <string name="pref_measureDataStore_default">2</string>
-    <string name="pref_local_times_description">Use your SD Card for local storage.</string>
-    <string name="pref_external_store_title">SD Card storage</string>
-    <string name="pref_measureDataStore_description">Select where your measurements are stored</string>
+    <string name="pref_local_times_description">Use your SD Card for local storage</string>
+    <string name="pref_external_store_title">Local storage</string>
     <string name="pref_measurements_title">Measurements</string>
     <string name="pref_pause_background_title">Allow pause in background</string>
     <string name="pref_pause_background_description">Pause measuring when the app is in the background</string>
     <string name="pref_use_batch_http_title">Enable batch mode</string>
-    <string name="pref_use_batch_http_description">Send your measurements in batches instead of one by one</string>
+    <string name="pref_use_batch_http_description">Send your measurements in batches to the server</string>
     <string name="pref_maxTrackHistory">Track history</string>
-    <string name="pref_maxTrackHistory_description">Select how many tracks you want to show in your local history</string>
+    <string name="pref_maxTrackHistory_description">Select how many tracks you want to show in My Tracks</string>
     <string name="pref_data_policy_title">Data policy</string>
     <string name="pref_data_policy_description">Make my measurements public</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="pref_noisetube_store_label">Save to NoiseTube.net</string>
+    <string name="pref_noisetube_store_description">All your measurements will be save at NoiseTube server</string>
+    <string name="pref_local_store_label">Save to local file</string>
+    <string name="pref_local_store_description">All your measurements will be save locally</string>
+    <string name="pref_no_store_label">Do not save measurements</string>
+    <string name="pref_no_store_label_description">You could not access to previous measurements</string>
+
 </resources>

@@ -33,8 +33,6 @@
 
 package net.noisetube.api.util;
 
-import android.util.Log;
-
 import net.noisetube.api.SLMClient;
 import net.noisetube.api.io.FileIO;
 import net.noisetube.api.io.FileWriter;

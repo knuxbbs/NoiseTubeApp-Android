@@ -1,4 +1,3 @@
-
 package net.noisetube.app.ui.widget;
 
 import android.content.Context;

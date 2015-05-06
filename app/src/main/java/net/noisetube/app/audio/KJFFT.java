@@ -234,7 +234,7 @@ public class KJFFT {
             b++;
         }
         /*
-    	System.out.println("KJFFT.java -- calculateFrequencyTable -- tableValues =\n");
+        System.out.println("KJFFT.java -- calculateFrequencyTable -- tableValues =\n");
     	for(int i = 0; i<wFt.length; i++) {
     		System.out.println(""+wFt[i]);
     	}

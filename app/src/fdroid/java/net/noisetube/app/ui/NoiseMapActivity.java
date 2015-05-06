@@ -1,9 +1,6 @@
 package net.noisetube.app.ui;
 
-import android.location.Location;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
 
 import net.noisetube.R;
 

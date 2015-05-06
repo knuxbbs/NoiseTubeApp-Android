@@ -285,4 +285,12 @@ public class SPLGraphView extends View implements SPLGraph.GUI {
             requestLayout();
         }
     }
+
+
+    public void reset() {
+        splG.setTrack(null);
+        invalidate();
+        requestLayout();
+
+    }
 }

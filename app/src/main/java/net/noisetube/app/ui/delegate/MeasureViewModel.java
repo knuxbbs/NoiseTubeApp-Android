@@ -62,7 +62,7 @@ public class MeasureViewModel {
                 if (pref.isTosAccepted() && pref.isAuthenticated() && !NTUtils.supportsInternetAccess()) {
 
                     pref.setSavingModeAndPersist(2);
-                    pref.setAlwaysUseBatchModeForHTTP(false);
+//                    pref.setAlwaysUseBatchModeForHTTP(false);
                     model.startMeasuring();
                     act.runOnUiThread(new Runnable() {
                         @Override
@@ -130,7 +130,8 @@ public class MeasureViewModel {
         track = model.getTrack();
         if (track != null) {
             track.pause(true);
-            if (track.getStatistics().getNumMeasurements() < 30) {
+
+            if (track.getStatistics().getNumMeasurements() < 30 && AndroidPreferences.getInstance().getSavingMode() != 0) {
 
                 act.runOnUiThread(new Runnable() {
                     @Override
