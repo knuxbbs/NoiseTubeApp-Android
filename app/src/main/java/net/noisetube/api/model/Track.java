@@ -202,6 +202,7 @@ public class Track implements Pausable, MeasurementListener {
     }
 
     public void newMeasurement(SLMMeasurement m) {
+
         if (slm.isRunning()) {
             try {
                 NTMeasurement ntM = (NTMeasurement) m;

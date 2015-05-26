@@ -38,7 +38,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.Html;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -104,7 +103,7 @@ public class TrackSummaryDialog extends Dialog {
 
             btnOK.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View btn) {
-                    Log.e("eee", "OK*setOnClickListener");
+
                     service.resetTrack();
                     cancel();
                 }
@@ -127,7 +126,6 @@ public class TrackSummaryDialog extends Dialog {
 
             if (AndroidPreferences.getInstance().getAccount() == null || AndroidPreferences.getInstance().getSavingMode() == 0) {
                 btnOK.setEnabled(true);
-                findViewById(R.id.rowTrackIDLabel).setVisibility(View.INVISIBLE);
             } else {
                 String id = (track.getTrackID() == -1) ? "PENDING" : Integer.toString(track.getTrackID());
                 ((TextView) findViewById(R.id.txtTrackID)).setText(id);
@@ -148,7 +146,7 @@ public class TrackSummaryDialog extends Dialog {
             ((TextView) findViewById(R.id.txtSummaryAvgLeq)).setText(MathNT.roundTo(stats.getLogAvrdBA(), 2) + " dB(A)");
             ((TextView) findViewById(R.id.txtSummaryDistance)).setText(StringUtils.formatDistance(stats.getDistanceCovered(), -2));
         } catch (Exception e) {
-            Log.e("error", "Error on showing track summary");
+
             cancel();
         }
 

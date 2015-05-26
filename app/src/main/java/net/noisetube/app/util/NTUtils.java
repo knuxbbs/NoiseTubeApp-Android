@@ -8,6 +8,12 @@ import android.net.NetworkInfo;
 
 import net.noisetube.app.core.AndroidNTClient;
 
+import org.apache.commons.codec.binary.Hex;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+
 /**
  * @author Humberto
  */
@@ -34,6 +40,24 @@ public class NTUtils {
             status = true;
         }
         return status;
+    }
+
+    public static String encryptPassword(String pass) throws Exception {
+        final String skeyString = "95128424a97797a166913557a6b4cc8e";
+        byte[] skey = Hex.decodeHex(skeyString.toCharArray());
+
+        //iv
+        final String ivString = "82e8c3ea8b59a0e293941d1cba0a39c3";
+        byte[] iv = Hex.decodeHex(ivString.toCharArray());
+
+        //encrypt
+        SecretKeySpec skeySpec1 = new SecretKeySpec(skey, "AES");
+        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+        cipher.init(Cipher.ENCRYPT_MODE, skeySpec1, new IvParameterSpec(iv));
+        byte[] encrypted = cipher.doFinal(pass.getBytes());
+        String encryptedString = Hex.encodeHexString(encrypted);
+
+        return encryptedString;
     }
 
     public boolean supportsInternetAccess(ContextWrapper contextWrapper) {

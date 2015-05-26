@@ -170,14 +170,19 @@ public class SoundLevelMeter implements Pausable, AudioStreamListener, Serializa
     }
 
     public void stop() {
-        if (recorder != null) //if(running)
-        {
-            stopRecording();
-            recorder.release();
-            recorder = null; //!!! running=false
-            calibrationCorrector = null;
-            paused = false;
+        try {
+            if (recorder != null) //if(running)
+            {
+                stopRecording();
+                recorder.release();
+                recorder = null; //!!! running=false
+                calibrationCorrector = null;
+                paused = false;
+            }
+        } catch (NullPointerException e) {
+            log.error(e, "Exception during stop");
         }
+
     }
 
     public boolean isRunning() {

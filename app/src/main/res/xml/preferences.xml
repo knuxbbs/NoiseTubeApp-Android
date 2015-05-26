@@ -31,11 +31,11 @@
             android:summary="@string/pref_no_store_label_description"
             android:title="@string/pref_no_store_label" />
 
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="pref_external_store"
-            android:summary="@string/pref_local_times_description"
-            android:title="@string/pref_external_store_title" />
+        <!--<CheckBoxPreference-->
+        <!--android:defaultValue="true"-->
+        <!--android:key="pref_external_store"-->
+        <!--android:summary="@string/pref_local_times_description"-->
+        <!--android:title="@string/pref_external_store_title" />-->
 
 
     </PreferenceCategory>
@@ -43,11 +43,11 @@
         android:key="pref_key_measurements_settings"
         android:title="@string/pref_measurements_title">
 
-        <!--<CheckBoxPreference-->
-        <!--android:defaultValue="false"-->
-        <!--android:key="pref_pause_background"-->
-        <!--android:summary="@string/pref_pause_background_description"-->
-        <!--android:title="@string/pref_pause_background_title" />-->
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="pref_gps"
+            android:summary="@string/pref_gps_description"
+            android:title="@string/pref_gps_title" />
 
         <!--<CheckBoxPreference-->
         <!--android:defaultValue="false"-->

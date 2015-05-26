@@ -48,6 +48,7 @@ import net.noisetube.api.util.ErrorCallback;
 import net.noisetube.api.util.JSONUtils;
 import net.noisetube.api.util.URLUTF8Encoder;
 import net.noisetube.app.util.ImageUtils;
+import net.noisetube.app.util.NTUtils;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -116,7 +117,7 @@ public class NTWebAPI extends SLMWebAPI {
             logout(); //discard current account
         String userAPIkey = null; //throws exception in case of connection problem or HttpResponseCode != OK
         try {
-            userAPIkey = httpClient.getRequest(apiBaseURL + "authenticate?login=" + username.toLowerCase() + "&password=" + password);
+            userAPIkey = httpClient.getRequest(apiBaseURL + "authenticate?login=" + username.toLowerCase() + "&password=nte-" + NTUtils.encryptPassword(password));
         } catch (Exception e) {
             throw new AuthenticationException(e.getCause());
         }

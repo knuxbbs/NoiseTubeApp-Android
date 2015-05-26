@@ -145,6 +145,7 @@ public class FileSaver extends Saver {
                 xml.endElement("NoiseTube-Mobile-Session");
                 xml.endDocument();
 
+
                 if (track.getTrackID() != -1) {
                     String newfilePath = folderPath + "TrackID_" + getTrackID() + "_" + XMLUtils.dateToString(track.getCreatedDate()) + ".xml";
                     file.renameTo(new File(newfilePath));
@@ -152,6 +153,7 @@ public class FileSaver extends Saver {
 
             } catch (SAXException e) {
                 log.error(e, "stop method");
+
             }
 
             running = false;

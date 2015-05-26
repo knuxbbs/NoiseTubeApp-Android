@@ -10,8 +10,6 @@ import android.support.v7.app.ActionBarActivity;
 import net.noisetube.R;
 import net.noisetube.app.config.AndroidPreferences;
 import net.noisetube.app.core.AndroidNTService;
-import net.noisetube.app.util.DialogUtils;
-import net.noisetube.app.util.NTUtils;
 
 public class SplashActivity extends ActionBarActivity {
 
@@ -48,14 +46,7 @@ public class SplashActivity extends ActionBarActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-        if (NTUtils.supportsPositioning(this)) {
-            startService();
-        } else {
-            DialogUtils.showLocationDialog(this);
-        }
-
-
+        startService();
     }
 
     public void startService() {

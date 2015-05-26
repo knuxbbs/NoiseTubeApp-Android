@@ -130,8 +130,9 @@ public class MeasureViewModel {
         track = model.getTrack();
         if (track != null) {
             track.pause(true);
+            AndroidPreferences pref = AndroidPreferences.getInstance();
 
-            if (track.getStatistics().getNumMeasurements() < 30 && AndroidPreferences.getInstance().getSavingMode() != 0) {
+            if (pref.isTosAccepted() && pref.getSavingMode() > pref.SAVE_NO && pref.isUseGPS() && track.getStatistics().getNumMeasurements() < 30) {
 
                 act.runOnUiThread(new Runnable() {
                     @Override
@@ -232,22 +233,6 @@ public class MeasureViewModel {
 
 
         if (pref.isTosAccepted() && pref.isLocationRequired()) {
-            body.setText(activity.getText(R.string.required_msg_login_dialog));
-            dialog = new AlertDialog.Builder(activity).setView(body)
-                    .setPositiveButton("Accept",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int whichButton) {
-                                    dialog.dismiss();
-                                    Intent intent = new Intent(activity, LoginActivity.class);
-                                    activity.startActivity(intent);
-                                    activity.finish();
-
-                                }
-                            }
-                    )
-                    .create();
-
-        } else if (pref.isTosAccepted() && pref.isLoginRequired()) {
             body.setText(activity.getText(R.string.required_msg_login_dialog));
             dialog = new AlertDialog.Builder(activity).setView(body)
                     .setPositiveButton("Accept",

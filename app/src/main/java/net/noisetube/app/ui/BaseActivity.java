@@ -480,12 +480,7 @@ public abstract class BaseActivity extends SimpleActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
 
-        if (pref.isTosAccepted()) {
-            getMenuInflater().inflate(R.menu.main_menu, menu);
-        } else {
-            getMenuInflater().inflate(R.menu.basic_menu, menu);
-        }
-
+        getMenuInflater().inflate(R.menu.main_menu, menu);
 
         return true;
     }
@@ -495,7 +490,13 @@ public abstract class BaseActivity extends SimpleActionBarActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.menu_settings:
-                Intent intent = new Intent(this, SettingsActivity.class);
+                Intent intent;
+                if (pref.isTosAccepted()) {
+                    intent = new Intent(this, SettingsActivity.class);
+                } else {
+                    intent = new Intent(this, BasicSettingsActivity.class);
+                }
+
                 startActivity(intent);
                 return true;
             case R.id.menu_help_feedback:

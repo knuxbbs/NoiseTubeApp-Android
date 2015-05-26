@@ -292,7 +292,7 @@ public abstract class Preferences implements Serializable {
     }
 
     public boolean isUseGPS() {
-        return device.supportsPositioning() && useGPS;
+        return useGPS;
     }
 
     public void setUseGPS(boolean useGPS) {

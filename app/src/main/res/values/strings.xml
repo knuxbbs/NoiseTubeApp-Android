@@ -52,7 +52,7 @@
     ]]>
     </string>
 
-    <string name="msg_location_warning_dialog">In order to be able to get noise maps, GPS should be enabled. Would you like to enable it?</string>
+    <string name="msg_location_warning_dialog">The current method to save your measurements requires enabling the GPS. If you want to enable it select \"ACCEPT\", in other case change your preferences.</string>
 
 
     <!--
@@ -88,5 +88,9 @@
     <string name="empty_msg">You do not have any tracks yet.</string>
     <string name="continue_measuring">Continue</string>
     <string name="server_down">Ups! NoiseTube server seems to be down. Please try in a few minutes.</string>
+    <string name="title_activity_basic_setting">Settings</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

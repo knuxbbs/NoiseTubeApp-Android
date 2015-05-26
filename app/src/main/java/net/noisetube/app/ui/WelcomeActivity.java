@@ -38,6 +38,11 @@ public class WelcomeActivity extends Activity {
         AndroidPreferences instance = AndroidPreferences.getInstance();
         instance.markTosAccepted();
         Intent intent;
+
+        instance.setSavingModeAndPersist(Preferences.SAVE_HTTP);
+        instance.setAlsoSaveToFileWhenInHTTPMode(true);
+        instance.setUseGPSAndPersist(true);
+
         if (instance.getAccount() == null) {
             intent = new Intent(this, LoginActivity.class);
 
@@ -53,7 +58,8 @@ public class WelcomeActivity extends Activity {
         AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
             protected Void doInBackground(Void... fields) {
                 AndroidPreferences instance = AndroidPreferences.getInstance();
-                instance.setSavingModeAndPersist(Preferences.SAVE_NO);
+                instance.setSavingModeAndPersist(Preferences.SAVE_FILE);
+                instance.setUseGPSAndPersist(false);
                 return null;
             }
         };

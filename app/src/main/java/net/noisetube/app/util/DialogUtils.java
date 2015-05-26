@@ -38,6 +38,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.noisetube.R;
+import net.noisetube.api.NTClient;
+import net.noisetube.app.config.AndroidPreferences;
 import net.noisetube.app.ui.SplashActivity;
 
 import java.text.SimpleDateFormat;
@@ -344,6 +346,8 @@ public class DialogUtils {
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int whichButton) {
                                     dialog.dismiss();
+                                    AndroidPreferences.getInstance().setUseGPSAndPersist(true);
+                                    NTClient.getInstance().getGeoTagger().enableGPS();
                                     startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
 
 

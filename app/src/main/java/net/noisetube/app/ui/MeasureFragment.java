@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +14,7 @@ import android.widget.TextView;
 
 import net.noisetube.R;
 import net.noisetube.api.TrackStatistics;
+import net.noisetube.api.config.Preferences;
 import net.noisetube.api.model.NTMeasurement;
 import net.noisetube.api.model.Track;
 import net.noisetube.api.ui.NTColor;
@@ -90,7 +90,10 @@ public class MeasureFragment extends Fragment implements TrackUI, NotificationLi
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (AndroidPreferences.getInstance().isTosAccepted() && !NTUtils.supportsPositioning()) {
+                AndroidPreferences pref = AndroidPreferences.getInstance();
+                if ((pref.isTosAccepted() && pref.getSavingMode() > Preferences.SAVE_NO
+                        && pref.isUseGPS() && !NTUtils.supportsPositioning()) || pref.isTosAccepted() && pref.getSavingMode() > Preferences.SAVE_NO
+                        && !pref.isUseGPS()) {
                     DialogUtils.showLocationDialog(getActivity());
                     return;
                 }
@@ -104,12 +107,15 @@ public class MeasureFragment extends Fragment implements TrackUI, NotificationLi
         btnPauseResume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (NTUtils.supportsPositioning()) {
-                    btnPauseResume.setEnabled(false);
-                    delegate.invokePauseOrResumeAction();
-                } else {
+                AndroidPreferences pref = AndroidPreferences.getInstance();
+                if ((pref.isTosAccepted() && pref.getSavingMode() > Preferences.SAVE_NO
+                        && pref.isUseGPS() && !NTUtils.supportsPositioning()) || pref.isTosAccepted() && pref.getSavingMode() > Preferences.SAVE_NO
+                        && !pref.isUseGPS()) {
                     DialogUtils.showLocationDialog(getActivity());
+                    return;
                 }
+                btnPauseResume.setEnabled(false);
+                delegate.invokePauseOrResumeAction();
 
 
             }
@@ -256,6 +262,7 @@ public class MeasureFragment extends Fragment implements TrackUI, NotificationLi
 
     @Override
     public void newMeasurement(final Track track, final NTMeasurement ntMeasurement, NTMeasurement ntMeasurement2) {
+
         try {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
@@ -335,7 +342,7 @@ public class MeasureFragment extends Fragment implements TrackUI, NotificationLi
 
     @Override
     public void measuringStopped(Track track) {
-        Log.e("measuringStopped", " " + track.getMeasurementsList().size());
+
         try {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
@@ -353,7 +360,7 @@ public class MeasureFragment extends Fragment implements TrackUI, NotificationLi
                         btnPauseResume.setVisibility(View.GONE);
                         btnStop.setVisibility(View.GONE);
                     } catch (Exception e) {
-                        Log.e("measuringStopped-1", " " + e.toString());
+
                         log.error(e, "measuringResumed Error");
                     }
                 }

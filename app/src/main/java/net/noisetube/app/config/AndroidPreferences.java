@@ -73,6 +73,7 @@ public class AndroidPreferences extends Preferences {
     private static final String PREF_NO_STORE = "pref_no_store";
     private static final String PREF_LOCAL_STORE = "pref_local_store";
     private static final String PREF_NOISETUBE_STORE = "pref_noisetube_store";
+    private static final String PREF_USE_GPS = "pref_gps";
 
 
     private static SharedPreferences settings = null;
@@ -151,8 +152,12 @@ public class AndroidPreferences extends Preferences {
                 setSavingMode(Preferences.SAVE_HTTP); // FILE
             } else {
                 setSavingMode(Preferences.SAVE_NO);
-//                setAlsoSaveToFileWhenInHTTPMode(false);
             }
+
+            boolean gps = settings.getBoolean(PREF_USE_GPS, true);
+
+            setUseGPS(gps);
+
 
             //setAlsoSaveToFileWhenInHTTPMode(settings.getBoolean(PREF_SAVE_TO_FILE_WHEN_HTTP, alsoSaveToFileWhenInHTTPMode));
 
@@ -207,6 +212,11 @@ public class AndroidPreferences extends Preferences {
     public void setSavingModeAndPersist(int savingMode) {
         super.setSavingMode(savingMode);
         settings.edit().putString(PREF_SAVING_MODE, String.valueOf(savingMode)).commit();
+    }
+
+    public void setUseGPSAndPersist(boolean enable) {
+        super.setUseGPS(enable);
+        settings.edit().putBoolean(PREF_USE_GPS, enable).commit();
     }
 
     @Override

@@ -82,6 +82,10 @@
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_settings" />
         <activity
+            android:name=".app.ui.BasicSettingsActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_settings" />
+        <activity
             android:name=".app.ui.MyAccountActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_my_account"></activity>
@@ -92,3 +96,4 @@
     </application>
 
 </manifest>
+
