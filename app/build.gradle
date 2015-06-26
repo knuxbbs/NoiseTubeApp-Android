@@ -15,8 +15,8 @@ android {
         applicationId "net.noisetube"
         minSdkVersion 14
         targetSdkVersion 21
-        versionCode 42
-        versionName '2.0.1'
+        versionCode 43
+        versionName '2.0.2'
         signingConfig signingConfigs.release
     }
     buildTypes {
@@ -67,5 +67,4 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile files('libs/jlibs-core.jar')
     compile files('libs/jlibs-xml.jar')
-    compile files('libs/commons-codec-1.10.jar')
 }
