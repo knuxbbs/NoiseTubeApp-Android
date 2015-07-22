@@ -57,3 +57,4 @@ proguard/
 app/app.impl
 app/manifest-merger-debug-report.txt
 app/manifest-merger-release-report.txt
+KeyFile
